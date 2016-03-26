@@ -1,10 +1,10 @@
 package models;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
+
 import javax.annotation.Generated;
+
 import com.fasterxml.jackson.annotation.JsonAnyGetter;
 import com.fasterxml.jackson.annotation.JsonAnySetter;
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -35,9 +35,9 @@ public class Gem {
 	@JsonProperty("specifications")
 	private String specifications;
 	@JsonProperty("images")
-	private List<Image> images = new ArrayList<Image>();
+	private Map<Integer, Image> images = new HashMap<Integer, Image>();
 	@JsonProperty("reviews")
-	private List<Review> reviews = new ArrayList<Review>();
+	private Map<Integer, Review> reviews = new HashMap<Integer, Review>();
 	@JsonIgnore
 	private Map<String, Object> additionalProperties = new HashMap<String, Object>();
 
@@ -198,7 +198,7 @@ public class Gem {
 	 * @return The images
 	 */
 	@JsonProperty("images")
-	public List<Image> getImages() {
+	public Map<Integer, Image> getImages() {
 		return images;
 	}
 
@@ -208,7 +208,7 @@ public class Gem {
 	 *            The images
 	 */
 	@JsonProperty("images")
-	public void setImages(List<Image> images) {
+	public void setImages(Map<Integer, Image> images) {
 		this.images = images;
 	}
 
@@ -217,7 +217,7 @@ public class Gem {
 	 * @return The reviews
 	 */
 	@JsonProperty("reviews")
-	public List<Review> getReviews() {
+	public Map<Integer, Review> getReviews() {
 		return reviews;
 	}
 
@@ -227,7 +227,7 @@ public class Gem {
 	 *            The reviews
 	 */
 	@JsonProperty("reviews")
-	public void setReviews(List<Review> reviews) {
+	public void setReviews(Map<Integer, Review> reviews) {
 		this.reviews = reviews;
 	}
 

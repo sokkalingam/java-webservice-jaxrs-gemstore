@@ -13,9 +13,11 @@
 			<artifactId>jaxrs-ri</artifactId>
 			<version>${jersey.version}</version>
 		</dependency>
+		<!--<dependency> <groupId>org.glassfish.jersey.media</groupId> <artifactId>jersey-media-moxy</artifactId> 
+			<version>${jersey.version}</version> </dependency> -->
 		<dependency>
 			<groupId>org.glassfish.jersey.media</groupId>
-			<artifactId>jersey-media-moxy</artifactId>
+			<artifactId>jersey-media-json-jackson</artifactId>
 			<version>${jersey.version}</version>
 		</dependency>
 		<dependency>

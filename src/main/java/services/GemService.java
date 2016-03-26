@@ -1,7 +1,7 @@
 package services;
 
 import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -19,8 +19,12 @@ public class GemService {
 		gem.setId(1);
 		gem.setName("Ruby");
 		gems.put(gem.getId(), gem);
-		gem.setReviews(Arrays.asList(new Review(1, 5, "Awesome body", "Sokka")));
-		gem.setImages(Arrays.asList(new Image(1, "thumb.com/thumb.jpg", "img.com/img/jpg")));
+		Map<Integer, Image> images = new HashMap<Integer, Image>();
+		Map<Integer, Review> reviews = new HashMap<Integer, Review>();
+		images.put(1, new Image(1, "thumb", "img"));
+		reviews.put(1, new Review(1, 5, "This is the review body", "Sokka"));
+		gem.setReviews(reviews);
+		gem.setImages(images);
 	}
 	
 	public List<Gem> getAllGems() {
