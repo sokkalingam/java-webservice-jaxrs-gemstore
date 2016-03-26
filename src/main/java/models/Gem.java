@@ -38,6 +38,7 @@ public class Gem extends Model{
 	private Map<Integer, Image> images = new HashMap<Integer, Image>();
 	@JsonProperty("reviews")
 	private Map<Integer, Review> reviews = new HashMap<Integer, Review>();
+	
 	@JsonIgnore
 	private Map<String, Object> additionalProperties = new HashMap<String, Object>();
 
@@ -220,6 +221,19 @@ public class Gem extends Model{
 	@JsonAnySetter
 	public void setAdditionalProperty(String name, Object value) {
 		this.additionalProperties.put(name, value);
+	}
+	
+	/*
+	 * Custom getters and setters
+	 */
+	@JsonIgnore
+	public Map<Integer, Image> getImagesMap() {
+		return this.images;
+	}
+	
+	@JsonIgnore
+	public Map<Integer, Review> getReviewsMap() {
+		return this.reviews;
 	}
 
 }
