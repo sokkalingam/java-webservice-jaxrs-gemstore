@@ -12,30 +12,27 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @Generated("org.jsonschema2pojo")
-@JsonPropertyOrder({ "id", "stars", "body", "author" })
-public class Review {
-	
-	public Review() {
-	}
-
-	public Review(Integer id, Integer stars, String body, String author) {
-		super();
-		this.id = id;
-		this.stars = stars;
-		this.body = body;
-		this.author = author;
-	}
+@JsonPropertyOrder({ "id", "thumb", "img" })
+public class Image {
 
 	@JsonProperty("id")
 	private Integer id;
-	@JsonProperty("stars")
-	private Integer stars;
-	@JsonProperty("body")
-	private String body;
-	@JsonProperty("author")
-	private String author;
+	@JsonProperty("thumb")
+	private String thumb;
+	@JsonProperty("img")
+	private String img;
 	@JsonIgnore
 	private Map<String, Object> additionalProperties = new HashMap<String, Object>();
+	
+	public Image() {
+	}
+	
+	public Image(Integer id, String thumb, String img) {
+		super();
+		this.id = id;
+		this.thumb = thumb;
+		this.img = img;
+	}
 
 	/**
 	 * 
@@ -58,59 +55,40 @@ public class Review {
 
 	/**
 	 * 
-	 * @return The stars
+	 * @return The thumb
 	 */
-	@JsonProperty("stars")
-	public Integer getStars() {
-		return stars;
+	@JsonProperty("thumb")
+	public String getThumb() {
+		return thumb;
 	}
 
 	/**
 	 * 
-	 * @param stars
-	 *            The stars
+	 * @param thumb
+	 *            The thumb
 	 */
-	@JsonProperty("stars")
-	public void setStars(Integer stars) {
-		this.stars = stars;
+	@JsonProperty("thumb")
+	public void setThumb(String thumb) {
+		this.thumb = thumb;
 	}
 
 	/**
 	 * 
-	 * @return The body
+	 * @return The img
 	 */
-	@JsonProperty("body")
-	public String getBody() {
-		return body;
+	@JsonProperty("img")
+	public String getImg() {
+		return img;
 	}
 
 	/**
 	 * 
-	 * @param body
-	 *            The body
+	 * @param img
+	 *            The img
 	 */
-	@JsonProperty("body")
-	public void setBody(String body) {
-		this.body = body;
-	}
-
-	/**
-	 * 
-	 * @return The author
-	 */
-	@JsonProperty("author")
-	public String getAuthor() {
-		return author;
-	}
-
-	/**
-	 * 
-	 * @param author
-	 *            The author
-	 */
-	@JsonProperty("author")
-	public void setAuthor(String author) {
-		this.author = author;
+	@JsonProperty("img")
+	public void setImg(String img) {
+		this.img = img;
 	}
 
 	@JsonAnyGetter
