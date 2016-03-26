@@ -12,22 +12,19 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @Generated("org.jsonschema2pojo")
-@JsonPropertyOrder({ "id", "stars", "body", "author" })
-public class Review {
+@JsonPropertyOrder({"stars", "body", "author" })
+public class Review extends Model {
 	
 	public Review() {
 	}
 
-	public Review(Integer id, Integer stars, String body, String author) {
+	public Review(Integer stars, String body, String author) {
 		super();
-		this.id = id;
 		this.stars = stars;
 		this.body = body;
 		this.author = author;
 	}
 
-	@JsonProperty("id")
-	private Integer id;
 	@JsonProperty("stars")
 	private Integer stars;
 	@JsonProperty("body")
@@ -36,25 +33,6 @@ public class Review {
 	private String author;
 	@JsonIgnore
 	private Map<String, Object> additionalProperties = new HashMap<String, Object>();
-
-	/**
-	 * 
-	 * @return The id
-	 */
-	@JsonProperty("id")
-	public Integer getId() {
-		return id;
-	}
-
-	/**
-	 * 
-	 * @param id
-	 *            The id
-	 */
-	@JsonProperty("id")
-	public void setId(Integer id) {
-		this.id = id;
-	}
 
 	/**
 	 * 

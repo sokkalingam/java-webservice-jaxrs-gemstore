@@ -1,6 +1,8 @@
 package models;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Generated;
@@ -14,12 +16,10 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @Generated("org.jsonschema2pojo")
-@JsonPropertyOrder({ "id", "name", "price", "description", "quantity", "canPurchase", "soldOut", "specifications",
+@JsonPropertyOrder({"name", "price", "description", "quantity", "canPurchase", "soldOut", "specifications",
 		"images", "reviews" })
-public class Gem {
+public class Gem extends Model{
 
-	@JsonProperty("id")
-	private Integer id;
 	@JsonProperty("name")
 	private String name;
 	@JsonProperty("price")
@@ -40,25 +40,6 @@ public class Gem {
 	private Map<Integer, Review> reviews = new HashMap<Integer, Review>();
 	@JsonIgnore
 	private Map<String, Object> additionalProperties = new HashMap<String, Object>();
-
-	/**
-	 * 
-	 * @return The id
-	 */
-	@JsonProperty("id")
-	public Integer getId() {
-		return id;
-	}
-
-	/**
-	 * 
-	 * @param id
-	 *            The id
-	 */
-	@JsonProperty("id")
-	public void setId(Integer id) {
-		this.id = id;
-	}
 
 	/**
 	 * 
@@ -198,8 +179,8 @@ public class Gem {
 	 * @return The images
 	 */
 	@JsonProperty("images")
-	public Map<Integer, Image> getImages() {
-		return images;
+	public List<Image> getImages() {
+		return new ArrayList<Image>(this.images.values());
 	}
 
 	/**
@@ -208,8 +189,8 @@ public class Gem {
 	 *            The images
 	 */
 	@JsonProperty("images")
-	public void setImages(Map<Integer, Image> images) {
-		this.images = images;
+	public void setImages(List<Image> images) {
+		this.images = Model.getMapFromList(images);
 	}
 
 	/**
@@ -217,8 +198,8 @@ public class Gem {
 	 * @return The reviews
 	 */
 	@JsonProperty("reviews")
-	public Map<Integer, Review> getReviews() {
-		return reviews;
+	public List<Review> getReviews() {
+		return new ArrayList<Review>(this.reviews.values());
 	}
 
 	/**
@@ -227,8 +208,8 @@ public class Gem {
 	 *            The reviews
 	 */
 	@JsonProperty("reviews")
-	public void setReviews(Map<Integer, Review> reviews) {
-		this.reviews = reviews;
+	public void setReviews(List<Review> reviews) {
+		this.reviews = Model.getMapFromList(reviews);
 	}
 
 	@JsonAnyGetter

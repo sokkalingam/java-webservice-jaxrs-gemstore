@@ -12,11 +12,9 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @Generated("org.jsonschema2pojo")
-@JsonPropertyOrder({ "id", "thumb", "img" })
-public class Image {
+@JsonPropertyOrder({"thumb", "img" })
+public class Image extends Model {
 
-	@JsonProperty("id")
-	private Integer id;
 	@JsonProperty("thumb")
 	private String thumb;
 	@JsonProperty("img")
@@ -27,30 +25,10 @@ public class Image {
 	public Image() {
 	}
 	
-	public Image(Integer id, String thumb, String img) {
+	public Image(String thumb, String img) {
 		super();
-		this.id = id;
 		this.thumb = thumb;
 		this.img = img;
-	}
-
-	/**
-	 * 
-	 * @return The id
-	 */
-	@JsonProperty("id")
-	public Integer getId() {
-		return id;
-	}
-
-	/**
-	 * 
-	 * @param id
-	 *            The id
-	 */
-	@JsonProperty("id")
-	public void setId(Integer id) {
-		this.id = id;
 	}
 
 	/**
