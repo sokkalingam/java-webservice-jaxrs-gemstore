@@ -7,9 +7,9 @@ import models.Gem;
 
 public class Database {
 	
-	private static Map<String, Gem> gems = new HashMap<String, Gem>();
+	private static Map<Integer, Gem> gems = new HashMap<Integer, Gem>();
 
-	public static Map<String, Gem> getGems() {
+	public static Map<Integer, Gem> getGems() {
 		return gems;
 	}
 
