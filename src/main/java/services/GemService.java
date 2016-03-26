@@ -56,5 +56,11 @@ public class GemService {
 			return null;
 		return this.gems.remove(id);
 	}
+	
+	public boolean isGemPresent(Integer gemId) {
+		if (gemId == null)
+			return false;
+		return gems.containsKey(gemId);
+	}
 
 }
