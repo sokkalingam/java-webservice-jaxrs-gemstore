@@ -1,14 +1,10 @@
 package models;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Generated;
 
-import com.fasterxml.jackson.annotation.JsonAnyGetter;
-import com.fasterxml.jackson.annotation.JsonAnySetter;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -16,9 +12,42 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @Generated("org.jsonschema2pojo")
-@JsonPropertyOrder({"name", "price", "description", "quantity", "canPurchase", "soldOut", "specifications",
-		"images", "reviews" })
-public class Gem extends Model{
+@JsonPropertyOrder({ "name", "price", "description", "quantity", "canPurchase", "soldOut", "specifications" })
+public class Gem extends Model {
+
+	/*
+	 {
+		  "name": "Ruby",
+		  "specifications": "24 Carat pure diamond",
+		  "description": "Shines bright like a diamond",
+		  "quantity": 10,
+		  "canPurchase": true,
+		  "soldOut": false,
+		  "images": [
+		    {
+		      "thumb": "thumb",
+		      "img": "img",
+		      "id": 1
+		    }
+		  ],
+		  "reviews": [
+		    {
+		      "stars": 5,
+		      "body": "This is the review body",
+		      "author": "Sokka",
+		      "id": 1
+		    }
+		  ],
+		  "id": 1
+	  }
+	 */
+
+	@Override
+	public String toString() {
+		return "Gem [id="+ super.getId() +", name=" + name + ", price=" + price + ", description=" + description + ", quantity=" + quantity
+				+ ", canPurchase=" + canPurchase + ", soldOut=" + soldOut + ", specifications=" + specifications
+				+ ", images=" + images + ", reviews=" + reviews + "]";
+	}
 
 	@JsonProperty("name")
 	private String name;
@@ -34,13 +63,10 @@ public class Gem extends Model{
 	private Boolean soldOut;
 	@JsonProperty("specifications")
 	private String specifications;
-	@JsonProperty("images")
-	private Map<Integer, Image> images = new HashMap<Integer, Image>();
-	@JsonProperty("reviews")
-	private Map<Integer, Review> reviews = new HashMap<Integer, Review>();
-	
 	@JsonIgnore
-	private Map<String, Object> additionalProperties = new HashMap<String, Object>();
+	private Map<Integer, Image> images = new HashMap<Integer, Image>();
+	@JsonIgnore
+	private Map<Integer, Review> reviews = new HashMap<Integer, Review>();
 
 	/**
 	 * 
@@ -176,64 +202,38 @@ public class Gem extends Model{
 	}
 
 	/**
-	 * 
-	 * @return The images
-	 */
-	@JsonProperty("images")
-	public List<Image> getImages() {
-		return new ArrayList<Image>(this.images.values());
+	* 
+	* @return
+	* The images
+	*/
+	public Map<Integer, Image> getImages() {
+	return images;
 	}
 
 	/**
-	 * 
-	 * @param images
-	 *            The images
-	 */
-	@JsonProperty("images")
-	public void setImages(List<Image> images) {
-		this.images = Model.getMapFromList(images);
+	* 
+	* @param images
+	* The images
+	*/
+	public void setImages(Map<Integer, Image> images) {
+	this.images = images;
 	}
 
 	/**
-	 * 
-	 * @return The reviews
-	 */
-	@JsonProperty("reviews")
-	public List<Review> getReviews() {
-		return new ArrayList<Review>(this.reviews.values());
+	* 
+	* @return
+	* The reviews
+	*/
+	public Map<Integer, Review> getReviews() {
+	return reviews;
 	}
 
 	/**
-	 * 
-	 * @param reviews
-	 *            The reviews
-	 */
-	@JsonProperty("reviews")
-	public void setReviews(List<Review> reviews) {
-		this.reviews = Model.getMapFromList(reviews);
+	* 
+	* @param reviews
+	* The reviews
+	*/
+	public void setReviews(Map<Integer, Review> reviews) {
+	this.reviews = reviews;
 	}
-
-	@JsonAnyGetter
-	public Map<String, Object> getAdditionalProperties() {
-		return this.additionalProperties;
-	}
-
-	@JsonAnySetter
-	public void setAdditionalProperty(String name, Object value) {
-		this.additionalProperties.put(name, value);
-	}
-	
-	/*
-	 * Custom getters and setters
-	 */
-	@JsonIgnore
-	public Map<Integer, Image> getImagesMap() {
-		return this.images;
-	}
-	
-	@JsonIgnore
-	public Map<Integer, Review> getReviewsMap() {
-		return this.reviews;
-	}
-
 }

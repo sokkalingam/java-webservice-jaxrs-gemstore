@@ -1,11 +1,7 @@
 package models;
 
-import java.util.HashMap;
-import java.util.Map;
 import javax.annotation.Generated;
-import com.fasterxml.jackson.annotation.JsonAnyGetter;
-import com.fasterxml.jackson.annotation.JsonAnySetter;
-import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
@@ -15,6 +11,11 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 @JsonPropertyOrder({"stars", "body", "author" })
 public class Review extends Model {
 	
+	@Override
+	public String toString() {
+		return "Review [stars=" + stars + ", body=" + body + ", author=" + author + "]";
+	}
+
 	public Review() {
 	}
 
@@ -31,8 +32,6 @@ public class Review extends Model {
 	private String body;
 	@JsonProperty("author")
 	private String author;
-	@JsonIgnore
-	private Map<String, Object> additionalProperties = new HashMap<String, Object>();
 
 	/**
 	 * 
@@ -90,15 +89,4 @@ public class Review extends Model {
 	public void setAuthor(String author) {
 		this.author = author;
 	}
-
-	@JsonAnyGetter
-	public Map<String, Object> getAdditionalProperties() {
-		return this.additionalProperties;
-	}
-
-	@JsonAnySetter
-	public void setAdditionalProperty(String name, Object value) {
-		this.additionalProperties.put(name, value);
-	}
-
 }

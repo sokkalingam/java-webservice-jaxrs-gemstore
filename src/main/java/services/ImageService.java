@@ -1,5 +1,6 @@
 package services;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -11,7 +12,7 @@ public class ImageService {
 
 	public List<Image> getImages(Integer gemId) {
 		if (gemService.isGemPresent(gemId))
-			return gemService.getGem(gemId).getImages();
+			return new ArrayList<Image>(gemService.getGem(gemId).getImages().values());
 		return null;
 	}
 
@@ -57,7 +58,7 @@ public class ImageService {
 
 	public Map<Integer, Image> getImageMap(Integer gemId) {
 		if (gemService.isGemPresent(gemId))
-			return gemService.getGem(gemId).getImagesMap();
+			return gemService.getGem(gemId).getImages();
 		return null;
 	}
 

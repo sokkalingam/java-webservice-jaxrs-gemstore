@@ -1,5 +1,6 @@
 package services;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -11,7 +12,7 @@ public class ReviewService {
 
 	public List<Review> getReviews(Integer gemId) {
 		if (gemService.isGemPresent(gemId))
-			return gemService.getGem(gemId).getReviews();
+			return new ArrayList<Review>(gemService.getGem(gemId).getReviews().values());
 		return null;
 	}
 
@@ -27,11 +28,11 @@ public class ReviewService {
 	public Review addReview(Integer gemId, Review review) {
 		if (gemId == null || review == null)
 			return null;
-		List<Review> reviews = getReviews(gemId);
-		if (reviews == null)
+		Map<Integer, Review> reviewMap = getReviewMap(gemId);
+		if (reviewMap == null)
 			return null;
-		review.setId(reviews.size() + 1);
-		reviews.add(review);
+		review.setId(reviewMap.size() + 1);
+		reviewMap.put(review.getId(), review);
 		return review;
 	}
 
@@ -41,7 +42,8 @@ public class ReviewService {
 		Map<Integer, Review> reviewMap = getReviewMap(gemId);
 		if (reviewMap != null && reviewMap.containsKey(reviewId)) {
 			review.setId(reviewId);
-			return reviewMap.put(reviewId, review);
+			reviewMap.put(reviewId, review);
+			return review;
 		}
 		return null;
 	}
@@ -57,7 +59,7 @@ public class ReviewService {
 
 	public Map<Integer, Review> getReviewMap(Integer gemId) {
 		if (gemService.isGemPresent(gemId))
-			return gemService.getGem(gemId).getReviewsMap();
+			return gemService.getGem(gemId).getReviews();
 		return null;
 	}
 
