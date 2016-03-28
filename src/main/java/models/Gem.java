@@ -63,6 +63,8 @@ public class Gem extends Model {
 	private Boolean soldOut;
 	@JsonProperty("specifications")
 	private String specifications;
+	@JsonProperty("image")
+	private String image;
 	@JsonIgnore
 	private Map<Integer, Image> images = new HashMap<Integer, Image>();
 	@JsonIgnore
@@ -200,6 +202,25 @@ public class Gem extends Model {
 	public void setSpecifications(String specifications) {
 		this.specifications = specifications;
 	}
+	
+	/**
+	 * 
+	 * @return image
+	 */
+	@JsonProperty("image")
+	public String getImage() {
+		return image;
+	}
+
+	/**
+	 * 
+	 * @param image
+	 *            The specifications
+	 */
+	@JsonProperty("image")
+	public void setImage(String image) {
+		this.image = image;
+	}
 
 	/**
 	* 
@@ -235,5 +256,18 @@ public class Gem extends Model {
 	*/
 	public void setReviews(Map<Integer, Review> reviews) {
 	this.reviews = reviews;
+	}
+	
+	public static Gem generateModel(int i) {
+		Gem gem = new Gem();
+		gem.setId(1);
+		gem.setName("Ruby " + i);
+		gem.setSpecifications("Specs of Ruby");
+		gem.setDescription("Description of ruby");
+		gem.setQuantity(10);
+		gem.setCanPurchase(true);
+		gem.setSoldOut(false);
+		gem.setImage("http://kodarat.com/wp-content/uploads/2015/01/sapphire.jpg");
+		return gem;
 	}
 }

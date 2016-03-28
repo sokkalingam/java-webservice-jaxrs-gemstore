@@ -11,6 +11,7 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 
 import models.Gem;
 import services.GemService;
@@ -21,42 +22,55 @@ import services.GemService;
 public class GemResource {
 	
 	private GemService gemService = new GemService();
+	private Gem gem;
+	private List<Gem> gems;
 	
 	@GET
-	public List<Gem> getAllGems() {
-		return gemService.getAllGems();
+	public Response getAllGems() {
+		gems = gemService.getAllGems();
+		return gems != null ? ResourceHelper.responseOk(gems) : ResourceHelper.responseNoContent();
 	}
 	
 	@GET
 	@Path("/{id}")
-	public Gem getGem(@PathParam("id") Integer id) {
-		return gemService.getGem(id);
+	public Response getGem(@PathParam("id") Integer id) {
+		this.gem = gemService.getGem(id);
+		return this.gem != null ? ResourceHelper.responseOk(gem) : ResourceHelper.responseNoContent();
 	}
 	
 	@POST
-	public Gem addGem(Gem gem) {
-		return gemService.addGem(gem);
+	public Response addGem(Gem gem) {
+		this.gem  = gemService.addGem(gem);
+		return this.gem != null ? ResourceHelper.responseCreated(gem) : ResourceHelper.responseNoContent();
 	}
 	
 	@PUT
 	@Path("/{id}")
-	public Gem updateGem(@PathParam("id") Integer id, Gem gem) {
-		return gemService.updateGem(id, gem);
+	public Response updateGem(@PathParam("id") Integer id, Gem gem) {
+		this.gem = gemService.updateGem(id, gem);
+		return this.gem != null ? ResourceHelper.responseOk(gem) : ResourceHelper.responseNoContent();
 	}
 	
 	@DELETE
 	@Path("/{id}")
-	public Gem deleteGem(@PathParam("id") Integer id) {
-		return gemService.deleteGem(id);
+	public Response deleteGem(@PathParam("id") Integer id) {
+		this.gem = gemService.deleteGem(id);
+		return this.gem != null ? ResourceHelper.responseOk(gem) : ResourceHelper.responseNoContent();
 	}
 	
 	@Path("/{gemId}/reviews")
 	public ReviewResource getReviews() {
 		return new ReviewResource();
-	}
+	}	
 	
-	@Path("/{gemId}/images")
-	public ImageResource getImages() {
-		return new ImageResource();
+	/*
+	 * Test methods
+	 */
+	@GET
+	@Path("/populate/{number}")
+	public Response populate(@PathParam("number") Integer number) {
+		for (int i = 1; i <= number; i++)
+			gemService.addGem(Gem.generateModel(i));
+		return getAllGems();
 	}
 }
