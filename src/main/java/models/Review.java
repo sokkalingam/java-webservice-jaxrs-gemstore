@@ -1,5 +1,7 @@
 package models;
 
+import java.util.Random;
+
 import javax.annotation.Generated;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
@@ -88,5 +90,24 @@ public class Review extends Model {
 	@JsonProperty("author")
 	public void setAuthor(String author) {
 		this.author = author;
+	}
+	
+	public static Review generateRandomModel() {
+		Review review  = new Review();
+		Random random = new Random();
+		
+		Integer stars = random.nextInt(5) + 1;
+		review.setStars(stars);
+		
+		if (stars > 3)
+			review.setBody("It looks fantastic! I loved it");
+		if (stars == 3)
+			review.setBody("It looks ok, you get what you pay for.");
+		if (stars < 3)
+			review.setBody("Don't waste your money on this, not good at all");
+		
+		review.setAuthor("user"+random.nextInt(9999)+1);
+		
+		return review;
 	}
 }

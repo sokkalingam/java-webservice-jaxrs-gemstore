@@ -14,6 +14,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import models.Gem;
+import models.Review;
 import services.GemService;
 
 @Path("/gems")
@@ -66,11 +67,18 @@ public class GemResource {
 	/*
 	 * Test methods
 	 */
+	@SuppressWarnings("unchecked")
 	@GET
-	@Path("/populate/{number}")
-	public Response populate(@PathParam("number") Integer number) {
-		for (int i = 1; i <= number; i++)
+	@Path("/populate/{gems}/{reviews}")
+	public Response populate(@PathParam("gems") Integer noOfGems, @PathParam("reviews") Integer noOfReviews) {
+		for (int i = 1; i <= noOfGems; i++)
 			gemService.addGem(Gem.generateModel(i));
-		return getAllGems();
+		
+		Response response = getAllGems();
+		List<Gem> gems = (List<Gem>) response.getEntity();
+		for (Gem gem : gems)
+			for (int i = 0; i < noOfReviews; i++)
+				new ReviewResource().addReview(gem.getId(), Review.generateRandomModel());
+		return response;
 	}
 }
