@@ -2,6 +2,7 @@ package models;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Random;
 
 import javax.annotation.Generated;
 
@@ -267,7 +268,23 @@ public class Gem extends Model {
 		gem.setQuantity(10);
 		gem.setCanPurchase(true);
 		gem.setSoldOut(false);
-		gem.setImage("http://kodarat.com/wp-content/uploads/2015/01/sapphire.jpg");
+		gem.setImage(randomImage());
+		gem.setPrice((double) (new Random().nextInt(30000) + 2000));
 		return gem;
+	}
+	
+	public static String randomImage() {
+		String[] images = new String[]{
+				"https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcT8ypLVHhQwRsmYrtkvfGYvwb2C3gkhEsPpAIkxtKlb67lTl1y6Fg",
+				"https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcR5jBTWlnZ-CWbSesQb9iF-937pqdXyacoj9ysz-MfTOBuOtb_IPw",
+				"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSqrxkyf8Vw-Rkl9UymC78lY96mGEX72Y8_PqiXB3Abi62pL1vb1g",
+				"https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcSq8IG14CUvoKo3Rx3HiYNyZhVnGZ8C7J7vSC3Gh2iQ3aI0BOFI",
+				"http://www.shopnaser.com/images/diamonds_facts.png",
+				"http://greenwich.blob.core.windows.net/pages/our-story/images/diamonds.png",
+				"http://pngimg.com/upload/diamond_PNG6700.png",
+				"http://diamondsbyfaith.com/wp-content/uploads/2013/05/Pink-diamond-rings-calleja1.jpg"
+		};
+		return images[new Random().nextInt(images.length)];
+		
 	}
 }
