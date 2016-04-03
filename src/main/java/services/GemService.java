@@ -63,12 +63,20 @@ public class GemService {
 		return gem;
 	}
 	
+	/**Update Gem
+	 * Sets Id and preserves reviews
+	 * @param id
+	 * @param gem
+	 * @return
+	 */
 	public Gem updateGem(Integer id, Gem gem) {
 		if (id == null || gem == null)
 			return null;
-		if (this.gems.get(id) == null)
+		Gem existingGem = this.gems.get(id);
+		if (existingGem == null)
 			return null;
 		gem.setId(id);
+		gem.setReviews(existingGem.getReviews());
 		this.gems.put(id, gem);
 		return gem;
 	}
