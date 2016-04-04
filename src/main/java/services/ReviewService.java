@@ -1,9 +1,12 @@
 package services;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import models.AverageReview;
 import models.Review;
 
 public class ReviewService {
@@ -61,6 +64,32 @@ public class ReviewService {
 		if (gemService.isGemPresent(gemId))
 			return gemService.getGem(gemId).getReviews();
 		return null;
+	}
+	
+	public AverageReview getAverageReview(Integer gemId) {
+		List<Review> reviews = getReviews(gemId);
+		AverageReview averageReview = new AverageReview();
+		Map<Integer, Integer> starsToUsersMap = new HashMap<Integer, Integer>();
+		
+		Integer sumOfStars = 0;
+		
+		for (Review review : reviews) {
+		
+			Integer stars = review.getStars();
+			sumOfStars += stars;
+			
+			if (starsToUsersMap.containsKey(stars))
+				starsToUsersMap.put(stars, starsToUsersMap.get(stars) + 1);
+			else
+				starsToUsersMap.put(stars, 1);
+			
+		}
+		
+		Double avgReview = ((double)sumOfStars/(double)reviews.size());
+		averageReview.setAverageReview(Double.valueOf(new DecimalFormat("#.##").format(avgReview)));
+		averageReview.setStarsToUsersMap(starsToUsersMap);
+		
+		return averageReview;
 	}
 
 }

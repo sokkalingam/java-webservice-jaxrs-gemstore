@@ -12,6 +12,7 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
+import models.AverageReview;
 import models.Review;
 import services.ReviewService;
 
@@ -47,6 +48,12 @@ public class ReviewResource {
 	@Path("/{reviewId}")
 	public Review deleteReview(@PathParam("gemId") Integer gemId, @PathParam("reviewId") Integer reviewId) {
 		return reviewService.deleteReview(gemId, reviewId);
+	}
+	
+	@GET
+	@Path("/averageReview")
+	public AverageReview getAverageReview(@PathParam("gemId") Integer gemId) {
+		return reviewService.getAverageReview(gemId);
 	}
 	
 
