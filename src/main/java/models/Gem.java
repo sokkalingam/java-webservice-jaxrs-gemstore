@@ -11,9 +11,11 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
+import models.review.GemReview;
+
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @Generated("org.jsonschema2pojo")
-@JsonPropertyOrder({ "name", "price", "description", "quantity", "canPurchase", "soldOut", "specifications" })
+@JsonPropertyOrder({ "name", "price", "description", "quantity", "canPurchase", "soldOut", "specifications", "gemReview" })
 public class Gem extends Model {
 
 	/*
@@ -41,15 +43,33 @@ public class Gem extends Model {
 	  }
 	 */
 
-	@Override
-	public String toString() {
-		return "Gem [id=" + super.getId() + ", name=" + name + ", price=" + price + ", description=" + description
-				+ ", quantity=" + quantity + ", canPurchase=" + canPurchase + ", soldOut=" + soldOut
-				+ ", specifications=" + specifications + ", images=" + images + ", reviews=" + reviews + "]";
-	}
+
 
 	@JsonProperty("name")
 	private String name;
+	@Override
+	public String toString() {
+		return "Gem [name="
+				+ name
+				+ ", price="
+				+ price
+				+ ", description="
+				+ description
+				+ ", quantity="
+				+ quantity
+				+ ", canPurchase="
+				+ canPurchase
+				+ ", soldOut="
+				+ soldOut
+				+ ", specifications="
+				+ specifications
+				+ ", image="
+				+ image
+				+ ", gemReview="
+				+ gemReview
+				+ "]";
+	}
+
 	@JsonProperty("price")
 	private Double price;
 	@JsonProperty("description")
@@ -65,9 +85,19 @@ public class Gem extends Model {
 	@JsonProperty("image")
 	private String image;
 	@JsonIgnore
-	private Map<Integer, Image> images = new HashMap<Integer, Image>();
+	private GemReview gemReview = new GemReview();
 	@JsonIgnore
-	private Map<Integer, Review> reviews = new HashMap<Integer, Review>();
+	private Map<Integer, Image> images = new HashMap<Integer, Image>();
+
+	@JsonIgnore
+	public GemReview getGemReview() {
+		return gemReview;
+	}
+
+	@JsonIgnore
+	public void setGemReview(GemReview gemReview) {
+		this.gemReview = gemReview;
+	}
 
 	/**
 	 * 
@@ -220,7 +250,7 @@ public class Gem extends Model {
 	public void setImage(String image) {
 		this.image = image;
 	}
-
+	
 	/**
 	 * 
 	 * @return The images
@@ -238,22 +268,6 @@ public class Gem extends Model {
 		this.images = images;
 	}
 
-	/**
-	 * 
-	 * @return The reviews
-	 */
-	public Map<Integer, Review> getReviews() {
-		return reviews;
-	}
-
-	/**
-	 * 
-	 * @param reviews
-	 *            The reviews
-	 */
-	public void setReviews(Map<Integer, Review> reviews) {
-		this.reviews = reviews;
-	}
 
 	public static Gem generateModel(int i) {
 		Gem gem = new Gem();

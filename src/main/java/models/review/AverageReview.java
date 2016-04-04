@@ -1,11 +1,8 @@
-package models;
+package models.review;
 
 import java.util.HashMap;
 import java.util.Map;
 
-import javax.xml.bind.annotation.XmlRootElement;
-
-@XmlRootElement
 public class AverageReview {
 
 	private Double averageReview;

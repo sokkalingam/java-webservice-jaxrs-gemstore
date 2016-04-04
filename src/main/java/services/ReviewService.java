@@ -6,16 +6,19 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import models.AverageReview;
-import models.Review;
+import models.review.AverageReview;
+import models.review.GemReview;
+import models.review.Review;
 
 public class ReviewService {
 
 	private GemService gemService = new GemService();
 
-	public List<Review> getReviews(Integer gemId) {
-		if (gemService.isGemPresent(gemId))
-			return new ArrayList<Review>(gemService.getGem(gemId).getReviews().values());
+	public GemReview getGemReview(Integer gemId) {
+		if (gemService.isGemPresent(gemId)) {
+			List<Review> reviews = new ArrayList<Review>(gemService.getGem(gemId).getGemReview().getReviewMap().values());
+			return new GemReview(getAverageReview(reviews), reviews);
+		}
 		return null;
 	}
 
@@ -62,12 +65,11 @@ public class ReviewService {
 
 	public Map<Integer, Review> getReviewMap(Integer gemId) {
 		if (gemService.isGemPresent(gemId))
-			return gemService.getGem(gemId).getReviews();
+			return gemService.getGem(gemId).getGemReview().getReviewMap();
 		return null;
 	}
 	
-	public AverageReview getAverageReview(Integer gemId) {
-		List<Review> reviews = getReviews(gemId);
+	public AverageReview getAverageReview(List<Review> reviews) {
 		AverageReview averageReview = new AverageReview();
 		Map<Integer, Integer> starsToUsersMap = new HashMap<Integer, Integer>();
 		

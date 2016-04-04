@@ -76,7 +76,7 @@ public class GemService {
 		if (existingGem == null)
 			return null;
 		gem.setId(id);
-		gem.setReviews(existingGem.getReviews());
+		gem.setGemReview(existingGem.getGemReview());
 		this.gems.put(id, gem);
 		return gem;
 	}
