@@ -70,6 +70,10 @@ public class ReviewService {
 	}
 	
 	public AverageReview getAverageReview(List<Review> reviews) {
+		
+		if (reviews == null || reviews.size() == 0)
+			return new AverageReview();
+		
 		AverageReview averageReview = new AverageReview();
 		Map<Integer, Integer> starsToUsersMap = new HashMap<Integer, Integer>();
 		

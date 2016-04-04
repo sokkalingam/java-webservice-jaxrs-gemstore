@@ -5,7 +5,7 @@ import java.util.Map;
 
 public class AverageReview {
 
-	private Double averageReview;
+	private Double averageReview = 0.00;
 	private Map<Integer, Integer> starsToUsersMap = new HashMap<Integer, Integer>();
 	
 	@Override
