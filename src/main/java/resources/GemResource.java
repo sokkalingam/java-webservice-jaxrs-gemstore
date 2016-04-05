@@ -14,7 +14,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import models.Gem;
-import models.Review;
+import models.review.Review;
 import services.GemService;
 
 @Path("/gems")

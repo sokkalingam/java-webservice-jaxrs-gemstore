@@ -1,7 +1,5 @@
 package resources;
 
-import java.util.List;
-
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -12,7 +10,8 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
-import models.Review;
+import models.review.GemReview;
+import models.review.Review;
 import services.ReviewService;
 
 @Consumes(MediaType.APPLICATION_JSON)
@@ -22,8 +21,8 @@ public class ReviewResource {
 	private ReviewService reviewService = new ReviewService();
 	
 	@GET
-	public List<Review> getReviews(@PathParam("gemId") Integer gemId) {
-		return reviewService.getReviews(gemId);
+	public GemReview getReviews(@PathParam("gemId") Integer gemId) {
+		return reviewService.getGemReview(gemId);
 	}
 	
 	@GET
@@ -48,6 +47,4 @@ public class ReviewResource {
 	public Review deleteReview(@PathParam("gemId") Integer gemId, @PathParam("reviewId") Integer reviewId) {
 		return reviewService.deleteReview(gemId, reviewId);
 	}
-	
-
 }
