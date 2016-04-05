@@ -77,6 +77,8 @@ public class GemService {
 			return null;
 		gem.setId(id);
 		gem.setGemReview(existingGem.getGemReview());
+		if (gem.getQuantity() < 1)
+			gem.setSoldOut(true);
 		this.gems.put(id, gem);
 		return gem;
 	}
