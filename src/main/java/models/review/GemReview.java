@@ -14,30 +14,15 @@ public class GemReview {
 	public GemReview() {
 	}
 	
-	public GemReview(AverageReview averageReview, List<Review> reviews) {
-		super();
-		this.averageReview = averageReview;
-		this.setReviews(reviews);
-	}
-	
-	private AverageReview averageReview;
-	private List<Review> reviews = new ArrayList<Review>();
 	@JsonIgnore
 	private Map<Integer, Review> reviewMap = new HashMap<Integer, Review>();
 	
 	public AverageReview getAverageReview() {
-		return averageReview;
-	}
-	public void setAverageReview(AverageReview averageReview) {
-		this.averageReview = averageReview;
+		return AverageReview.getAverageReview(getReviews());
 	}
 
 	public List<Review> getReviews() {
-		return reviews;
-	}
-
-	public void setReviews(List<Review> reviews) {
-		this.reviews = reviews;
+		return new ArrayList<Review>(reviewMap.values());
 	}
 	
 	@JsonIgnore
