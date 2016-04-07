@@ -84,17 +84,17 @@ public class Gem extends Model {
 	private String specifications;
 	@JsonProperty("image")
 	private String image;
-	@JsonIgnore
+	@JsonProperty("gemReview")
 	private GemReview gemReview = new GemReview();
 	@JsonIgnore
 	private Map<Integer, Image> images = new HashMap<Integer, Image>();
-
-	@JsonIgnore
+	
+	@JsonProperty("gemReview")
 	public GemReview getGemReview() {
 		return gemReview;
 	}
 
-	@JsonIgnore
+	@JsonProperty("gemReview")
 	public void setGemReview(GemReview gemReview) {
 		this.gemReview = gemReview;
 	}

@@ -1,12 +1,7 @@
 package services;
 
-import java.text.DecimalFormat;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
-import models.review.AverageReview;
 import models.review.GemReview;
 import models.review.Review;
 
@@ -16,8 +11,7 @@ public class ReviewService {
 
 	public GemReview getGemReview(Integer gemId) {
 		if (gemService.isGemPresent(gemId)) {
-			List<Review> reviews = new ArrayList<Review>(gemService.getGem(gemId).getGemReview().getReviewMap().values());
-			return new GemReview(getAverageReview(reviews), reviews);
+			return gemService.getGem(gemId).getGemReview();
 		}
 		return null;
 	}
@@ -67,35 +61,6 @@ public class ReviewService {
 		if (gemService.isGemPresent(gemId))
 			return gemService.getGem(gemId).getGemReview().getReviewMap();
 		return null;
-	}
-	
-	public AverageReview getAverageReview(List<Review> reviews) {
-		
-		if (reviews == null || reviews.size() == 0)
-			return new AverageReview();
-		
-		AverageReview averageReview = new AverageReview();
-		Map<Integer, Integer> starsToUsersMap = new HashMap<Integer, Integer>();
-		
-		Integer sumOfStars = 0;
-		
-		for (Review review : reviews) {
-		
-			Integer stars = review.getStars();
-			sumOfStars += stars;
-			
-			if (starsToUsersMap.containsKey(stars))
-				starsToUsersMap.put(stars, starsToUsersMap.get(stars) + 1);
-			else
-				starsToUsersMap.put(stars, 1);
-			
-		}
-		
-		Double avgReview = ((double)sumOfStars/(double)reviews.size());
-		averageReview.setAverageReview(Double.valueOf(new DecimalFormat("#.##").format(avgReview)));
-		averageReview.setStarsToUsersMap(starsToUsersMap);
-		
-		return averageReview;
 	}
 
 }
