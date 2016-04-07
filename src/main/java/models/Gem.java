@@ -7,12 +7,14 @@ import java.util.Random;
 import javax.annotation.Generated;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 import models.review.GemReview;
 
+@JsonIgnoreProperties(ignoreUnknown = true)
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @Generated("org.jsonschema2pojo")
 @JsonPropertyOrder({ "name", "price", "description", "quantity", "canPurchase", "soldOut", "specifications", "gemReview" })
@@ -84,7 +86,7 @@ public class Gem extends Model {
 	private String specifications;
 	@JsonProperty("image")
 	private String image;
-	@JsonProperty("gemReview")
+	@JsonIgnore
 	private GemReview gemReview = new GemReview();
 	@JsonIgnore
 	private Map<Integer, Image> images = new HashMap<Integer, Image>();
@@ -93,8 +95,7 @@ public class Gem extends Model {
 	public GemReview getGemReview() {
 		return gemReview;
 	}
-
-	@JsonProperty("gemReview")
+	@JsonIgnore
 	public void setGemReview(GemReview gemReview) {
 		this.gemReview = gemReview;
 	}
