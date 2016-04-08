@@ -72,7 +72,9 @@ public class GemService {
 		String maxPrice = queryParameters.getFirst("maxPrice");
 		String rating = queryParameters.getFirst("rating");
 		for (Gem gem : allGems)
-			if (_isNameContains(gem, searchName) && _isWithinPriceRange(gem, minPrice, maxPrice) && _isAverageReviewAbove(gem, rating))
+			if (_isNameContains(gem, searchName)
+					&& _isWithinPriceRange(gem, minPrice, maxPrice)
+					&& _isAverageReviewAbove(gem, rating))
 				result.add(gem);
 		
 		return result;
