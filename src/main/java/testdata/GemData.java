@@ -146,7 +146,7 @@ public class GemData {
 			 };
 	
 	public static String getName() {
-		return names[new Random().nextInt(names.length - 1)];
+		return names[new Random().nextInt(names.length)];
 	}
 	
 	public static String getImage() {

@@ -79,7 +79,7 @@ public class GemResource {
 	@Path("/populate/{gems}/{reviews}")
 	public Response populate(@PathParam("gems") Integer noOfGems, @PathParam("reviews") Integer noOfReviews) {
 		for (int i = 1; i <= noOfGems; i++)
-			gemService.addGem(Gem.generateModel(i));
+			gemService.addGem(Gem.generateModel());
 		
 		Response response = getAllGems();
 		List<Gem> gems = (List<Gem>) response.getEntity();

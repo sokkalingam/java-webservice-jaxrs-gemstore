@@ -244,9 +244,8 @@ public class Gem extends Model {
 	}
 
 
-	public static Gem generateModel(int i) {
+	public static Gem generateModel() {
 		Gem gem = new Gem();
-		gem.setId(1);
 		gem.setName(GemData.getName());
 		gem.setSpecifications("Item ID:	399349, Content: 10 gems, Weight: 2.18ct (total), Calibrated: 3.5 mm, "
 				+ "ExactSize:	3.50 mm x 2.06 mm (avg.), Shape:	Round Facet, Clarity:	VS-SI, "
@@ -254,7 +253,7 @@ public class Gem extends Model {
 		gem.setDescription("From the Radiant Reflections® collection, this spectacular solitaire ring for her features"
 				+ " a 1/2-carat princess-cut diamond set in 10K white gold. The ring is meticulously crafted to create a"
 				+ " larger, more dramatic look. Diamond Total Carat Weight may range from .45 - .57 carats.");
-		gem.setQuantity(new Random().nextInt(5) + 1);
+		gem.setQuantity(new Random().nextInt(4) + 1);
 		gem.setCanPurchase(true);
 		gem.setSoldOut(false);
 		gem.setImage(GemData.getImage());
