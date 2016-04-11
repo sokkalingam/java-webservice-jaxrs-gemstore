@@ -13,39 +13,13 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 import models.review.GemReview;
+import testdata.GemData;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @Generated("org.jsonschema2pojo")
 @JsonPropertyOrder({ "name", "price", "description", "quantity", "canPurchase", "soldOut", "specifications", "gemReview" })
 public class Gem extends Model {
-
-	/*
-	 * { "name": "Ruby", "specifications": "24 Carat pure diamond",
-	 * "description": "Shines bright like a diamond", "quantity": 10,
-		  "quantity": 10,
-		  "canPurchase": true,
-		  "soldOut": false,
-		  "images": [
-		    {
-		      "thumb": "thumb",
-		      "img": "img",
-		      "id": 1
-		    }
-		  ],
-		  "reviews": [
-		    {
-		      "stars": 5,
-		      "body": "This is the review body",
-		      "author": "Sokka",
-		      "id": 1
-		    }
-		  ],
-		  "id": 1
-	  }
-	 */
-
-
 
 	@JsonProperty("name")
 	private String name;
@@ -273,32 +247,18 @@ public class Gem extends Model {
 	public static Gem generateModel(int i) {
 		Gem gem = new Gem();
 		gem.setId(1);
-		gem.setName("Ruby " + i);
+		gem.setName(GemData.getName());
 		gem.setSpecifications("Item ID:	399349, Content: 10 gems, Weight: 2.18ct (total), Calibrated: 3.5 mm, "
 				+ "ExactSize:	3.50 mm x 2.06 mm (avg.), Shape:	Round Facet, Clarity:	VS-SI, "
 				+ "Treatment:	Heated, Origin:	Myanmar");
 		gem.setDescription("From the Radiant Reflections® collection, this spectacular solitaire ring for her features"
 				+ " a 1/2-carat princess-cut diamond set in 10K white gold. The ring is meticulously crafted to create a"
 				+ " larger, more dramatic look. Diamond Total Carat Weight may range from .45 - .57 carats.");
-		gem.setQuantity(10);
+		gem.setQuantity(new Random().nextInt(5) + 1);
 		gem.setCanPurchase(true);
 		gem.setSoldOut(false);
-		gem.setImage(randomImage());
+		gem.setImage(GemData.getImage());
 		gem.setPrice((double) (new Random().nextInt(30000) + 2000));
 		return gem;
-	}
-
-	public static String randomImage() {
-		String[] images = new String[] {
-				"https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcT8ypLVHhQwRsmYrtkvfGYvwb2C3gkhEsPpAIkxtKlb67lTl1y6Fg",
-				"https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcR5jBTWlnZ-CWbSesQb9iF-937pqdXyacoj9ysz-MfTOBuOtb_IPw",
-				"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSqrxkyf8Vw-Rkl9UymC78lY96mGEX72Y8_PqiXB3Abi62pL1vb1g",
-				"https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcSq8IG14CUvoKo3Rx3HiYNyZhVnGZ8C7J7vSC3Gh2iQ3aI0BOFI",
-				"http://www.shopnaser.com/images/diamonds_facts.png",
-				"http://greenwich.blob.core.windows.net/pages/our-story/images/diamonds.png",
-				"http://pngimg.com/upload/diamond_PNG6700.png",
-				"http://diamondsbyfaith.com/wp-content/uploads/2013/05/Pink-diamond-rings-calleja1.jpg" };
-		return images[new Random().nextInt(images.length)];
-
 	}
 }
