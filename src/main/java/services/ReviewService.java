@@ -8,6 +8,7 @@ import models.review.Review;
 public class ReviewService {
 
 	private GemService gemService = new GemService();
+	private static Integer reviewCounter = 0;
 
 	public GemReview getGemReview(Integer gemId) {
 		if (gemService.isGemPresent(gemId)) {
@@ -31,7 +32,7 @@ public class ReviewService {
 		Map<Integer, Review> reviewMap = getReviewMap(gemId);
 		if (reviewMap == null)
 			return null;
-		review.setId(reviewMap.size() + 1);
+		review.setId(reviewCounter++);
 		reviewMap.put(review.getId(), review);
 		return review;
 	}

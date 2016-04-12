@@ -16,6 +16,7 @@ import services.helpers.ParseHelper;
 public class GemService {
 	
 	private Map<Integer, Gem> gems = Database.getGems();
+	private static Integer gemCounter = 0;
 	
 	public GemService() {
 		
@@ -59,7 +60,7 @@ public class GemService {
 	public Gem addGem(Gem gem) {
 		if (gem == null)
 			return null;
-		gem.setId(this.gems.size() + 1);
+		gem.setId(gemCounter++);
 		this.gems.put(gem.getId(), gem);
 		return gem;
 	}
