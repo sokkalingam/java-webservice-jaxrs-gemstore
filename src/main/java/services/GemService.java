@@ -16,6 +16,8 @@ import services.helpers.ParseHelper;
 public class GemService {
 	
 	private Map<Integer, Gem> gems = Database.getGems();
+	private List<Gem> gemsInCart = Database.getGemsInCart();
+	
 	private static Integer gemCounter = 0;
 	
 	public GemService() {
@@ -89,6 +91,30 @@ public class GemService {
 		if (id == null)
 			return null;
 		return this.gems.remove(id);
+	}
+	
+	public List<Gem> getGemsInCart() {
+		return gemsInCart;
+	}
+	
+	public Gem addGemToCart(Integer id) {
+		if (isGemPresent(id)) {
+			Gem gem = gems.get(id);
+			if (!gemsInCart.contains(gem)) {
+				gemsInCart.add(gem);
+				return gem;
+			}
+		}
+		return null;
+	}
+	
+	public Gem removeGemFromCart(Integer id) {
+		if (isGemPresent(id)) {
+			Gem gem = gems.get(id);
+			if (gemsInCart.remove(gem))
+				return gem;
+		}
+		return null;
 	}
 	
 	public boolean isGemPresent(Integer gemId) {
