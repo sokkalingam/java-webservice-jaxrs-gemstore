@@ -56,6 +56,8 @@ public class Gem extends Model {
 	private Boolean canPurchase;
 	@JsonProperty("soldOut")
 	private Boolean soldOut;
+	@JsonProperty("inCart")
+	private Boolean inCart;
 	@JsonProperty("specifications")
 	private String specifications;
 	@JsonProperty("image")
@@ -242,6 +244,15 @@ public class Gem extends Model {
 	public void setImages(Map<Integer, Image> images) {
 		this.images = images;
 	}
+	
+	@JsonProperty("inCart")
+	public Boolean isInCart() {
+		return inCart;
+	}
+	@JsonProperty("inCart")
+	public void setInCart(Boolean inCart) {
+		this.inCart = inCart;
+	}
 
 
 	public static Gem generateModel() {
@@ -256,6 +267,7 @@ public class Gem extends Model {
 		gem.setQuantity(new Random().nextInt(4) + 1);
 		gem.setCanPurchase(true);
 		gem.setSoldOut(false);
+		gem.setInCart(false);
 		gem.setImage(GemData.getImage());
 		gem.setPrice((double) (new Random().nextInt(30000) + 2000));
 		return gem;
