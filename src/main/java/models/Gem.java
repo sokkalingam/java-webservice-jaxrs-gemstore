@@ -177,17 +177,7 @@ public class Gem extends Model {
 	 */
 	@JsonProperty("soldOut")
 	public Boolean getSoldOut() {
-		return soldOut;
-	}
-
-	/**
-	 * 
-	 * @param soldOut
-	 *            The soldOut
-	 */
-	@JsonProperty("soldOut")
-	public void setSoldOut(Boolean soldOut) {
-		this.soldOut = soldOut;
+		return quantity != null ? quantity <= 0 : false;
 	}
 
 	/**
@@ -266,7 +256,6 @@ public class Gem extends Model {
 				+ " larger, more dramatic look. Diamond Total Carat Weight may range from .45 - .57 carats.");
 		gem.setQuantity(new Random().nextInt(4) + 1);
 		gem.setCanPurchase(true);
-		gem.setSoldOut(false);
 		gem.setInCart(false);
 		gem.setImage(GemData.getImage());
 		gem.setPrice((double) (new Random().nextInt(30000) + 2000));

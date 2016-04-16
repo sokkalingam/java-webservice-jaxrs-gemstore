@@ -80,10 +80,24 @@ public class GemService {
 			return null;
 		gem.setId(id);
 		gem.setGemReview(existingGem.getGemReview());
-		if (gem.getQuantity() < 1)
-			gem.setSoldOut(true);
 		this.gems.put(id, gem);
 		return gem;
+	}
+	
+	public Gem checkout(Integer id) {
+		if (id == null)
+			return null;
+		Gem gem = null;
+		if (isGemPresent(id)) {
+			gem = gems.get(gem);
+			
+			if (gem.getQuantity() > 0)
+				gem.setQuantity(gem.getQuantity() - 1);
+			
+			return gem;
+		}
+		
+		return null;
 	}
 	
 	public Gem deleteGem(Integer id) {
