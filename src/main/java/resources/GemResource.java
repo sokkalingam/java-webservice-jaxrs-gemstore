@@ -72,17 +72,24 @@ public class GemResource {
 		return ResourceHelper.responseOk(gemService.getGemsInCart());
 	}
 	
-	@GET
+	@POST
 	@Path("/{id}/addToCart")
 	public Response addToCart(@PathParam("id") Integer id) {
 		this.gem = gemService.addGemToCart(id);
 		return this.gem != null ? ResourceHelper.responseOk(gem) : ResourceHelper.responseNoContent();
 	}
 	
-	@GET
+	@POST
 	@Path("/{id}/removeFromCart")
 	public Response removeFromCart(@PathParam("id") Integer id) {
 		this.gem = gemService.removeGemFromCart(id);
+		return this.gem != null ? ResourceHelper.responseOk(gem) : ResourceHelper.responseNoContent();
+	}
+	
+	@POST
+	@Path("/{id}/checkout")
+	public Response checkout(@PathParam("id") Integer id) {
+		this.gem = gemService.checkout(id);
 		return this.gem != null ? ResourceHelper.responseOk(gem) : ResourceHelper.responseNoContent();
 	}
 	

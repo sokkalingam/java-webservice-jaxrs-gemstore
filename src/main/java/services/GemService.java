@@ -7,6 +7,7 @@ import java.util.Map;
 import javax.ws.rs.core.MultivaluedMap;
 import javax.ws.rs.core.UriInfo;
 
+import org.apache.commons.lang3.BooleanUtils;
 import org.apache.commons.lang3.StringUtils;
 
 import databases.Database;
@@ -89,7 +90,7 @@ public class GemService {
 			return null;
 		Gem gem = null;
 		if (isGemPresent(id)) {
-			gem = gems.get(gem);
+			gem = gems.get(id);
 			
 			if (gem.getQuantity() > 0)
 				gem.setQuantity(gem.getQuantity() - 1);
@@ -109,7 +110,7 @@ public class GemService {
 	public List<Gem> getGemsInCart() {
 		List<Gem> gemsInCart = new ArrayList<Gem>();
 		for (Gem gem : this.gems.values())
-			if (gem.isInCart())
+			if (BooleanUtils.isTrue(gem.isInCart()))
 				gemsInCart.add(gem);
 		return gemsInCart;
 	}
@@ -117,7 +118,7 @@ public class GemService {
 	public Gem addGemToCart(Integer id) {
 		if (isGemPresent(id)) {
 			Gem gem = gems.get(id);
-			if (!gem.isInCart()) {
+			if (!BooleanUtils.isTrue(gem.isInCart())) {
 				gem.setInCart(true);
 				return gem;
 			}
