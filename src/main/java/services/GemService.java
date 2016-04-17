@@ -7,6 +7,7 @@ import java.util.Map;
 import javax.ws.rs.core.MultivaluedMap;
 import javax.ws.rs.core.UriInfo;
 
+import org.apache.commons.lang3.BooleanUtils;
 import org.apache.commons.lang3.StringUtils;
 
 import databases.Database;
@@ -16,6 +17,7 @@ import services.helpers.ParseHelper;
 public class GemService {
 	
 	private Map<Integer, Gem> gems = Database.getGems();
+	
 	private static Integer gemCounter = 0;
 	
 	public GemService() {
@@ -79,16 +81,60 @@ public class GemService {
 			return null;
 		gem.setId(id);
 		gem.setGemReview(existingGem.getGemReview());
-		if (gem.getQuantity() < 1)
-			gem.setSoldOut(true);
 		this.gems.put(id, gem);
 		return gem;
+	}
+	
+	public Gem checkout(Integer id) {
+		if (id == null)
+			return null;
+		Gem gem = null;
+		if (isGemPresent(id)) {
+			gem = gems.get(id);
+			
+			if (gem.getQuantity() > 0)
+				gem.setQuantity(gem.getQuantity() - 1);
+			
+			return gem;
+		}
+		
+		return null;
 	}
 	
 	public Gem deleteGem(Integer id) {
 		if (id == null)
 			return null;
 		return this.gems.remove(id);
+	}
+	
+	public List<Gem> getGemsInCart() {
+		List<Gem> gemsInCart = new ArrayList<Gem>();
+		for (Gem gem : this.gems.values())
+			if (BooleanUtils.isTrue(gem.isInCart()))
+				gemsInCart.add(gem);
+		return gemsInCart;
+	}
+	
+	public Gem addGemToCart(Integer id) {
+		if (isGemPresent(id)) {
+			Gem gem = gems.get(id);
+			if (!BooleanUtils.isTrue(gem.isInCart())) {
+				gem.setInCart(true);
+				return gem;
+			}
+		}
+		return null;
+	}
+	
+	public Gem removeGemFromCart(Integer id) {
+		if (isGemPresent(id)) {
+			Gem gem = gems.get(id);
+			if (gem.isInCart()) {
+				gem.setInCart(false);
+				return gem;
+			}
+		}
+		return null;
 	}
 	
 	public boolean isGemPresent(Integer gemId) {

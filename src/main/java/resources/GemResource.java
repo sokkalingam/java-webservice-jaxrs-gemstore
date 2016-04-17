@@ -66,10 +66,37 @@ public class GemResource {
 		return this.gem != null ? ResourceHelper.responseOk(gem) : ResourceHelper.responseNoContent();
 	}
 	
+	@GET
+	@Path("/cart")
+	public Response getGemsInCart() {
+		return ResourceHelper.responseOk(gemService.getGemsInCart());
+	}
+	
+	@POST
+	@Path("/{id}/addToCart")
+	public Response addToCart(@PathParam("id") Integer id) {
+		this.gem = gemService.addGemToCart(id);
+		return this.gem != null ? ResourceHelper.responseOk(gem) : ResourceHelper.responseNoContent();
+	}
+	
+	@POST
+	@Path("/{id}/removeFromCart")
+	public Response removeFromCart(@PathParam("id") Integer id) {
+		this.gem = gemService.removeGemFromCart(id);
+		return this.gem != null ? ResourceHelper.responseOk(gem) : ResourceHelper.responseNoContent();
+	}
+	
+	@POST
+	@Path("/{id}/checkout")
+	public Response checkout(@PathParam("id") Integer id) {
+		this.gem = gemService.checkout(id);
+		return this.gem != null ? ResourceHelper.responseOk(gem) : ResourceHelper.responseNoContent();
+	}
+	
 	@Path("/{gemId}/reviews")
 	public ReviewResource getReviews() {
 		return new ReviewResource();
-	}	
+	}
 	
 	/*
 	 * Test methods
