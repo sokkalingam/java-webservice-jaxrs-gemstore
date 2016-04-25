@@ -1,10 +1,14 @@
 package models;
 
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Random;
 
-import javax.annotation.Generated;
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Lob;
+import javax.persistence.OneToOne;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -15,39 +19,20 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import models.review.GemReview;
 import testdata.GemData;
 
+@Entity
 @JsonIgnoreProperties(ignoreUnknown = true)
 @JsonInclude(JsonInclude.Include.NON_NULL)
-@Generated("org.jsonschema2pojo")
 @JsonPropertyOrder({ "name", "price", "description", "quantity", "canPurchase", "soldOut", "specifications", "gemReview" })
-public class Gem extends Model {
+public class Gem implements Model {
 
+	@Id @GeneratedValue
+	@JsonProperty("id")
+	private Integer id;
 	@JsonProperty("name")
 	private String name;
-	@Override
-	public String toString() {
-		return "Gem [name="
-				+ name
-				+ ", price="
-				+ price
-				+ ", description="
-				+ description
-				+ ", quantity="
-				+ quantity
-				+ ", canPurchase="
-				+ canPurchase
-				+ ", soldOut="
-				+ soldOut
-				+ ", specifications="
-				+ specifications
-				+ ", image="
-				+ image
-				+ ", gemReview="
-				+ gemReview
-				+ "]";
-	}
-
 	@JsonProperty("price")
 	private Double price;
+	@Lob
 	@JsonProperty("description")
 	private String description;
 	@JsonProperty("quantity")
@@ -58,14 +43,15 @@ public class Gem extends Model {
 	private Boolean soldOut;
 	@JsonProperty("inCart")
 	private Boolean inCart;
+	@Lob
 	@JsonProperty("specifications")
 	private String specifications;
+	@Lob
 	@JsonProperty("image")
 	private String image;
+	@OneToOne (cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	@JsonIgnore
 	private GemReview gemReview = new GemReview();
-	@JsonIgnore
-	private Map<Integer, Image> images = new HashMap<Integer, Image>();
 	
 	@JsonProperty("gemReview")
 	public GemReview getGemReview() {
@@ -218,23 +204,6 @@ public class Gem extends Model {
 		this.image = image;
 	}
 	
-	/**
-	 * 
-	 * @return The images
-	 */
-	public Map<Integer, Image> getImages() {
-		return images;
-	}
-
-	/**
-	 * 
-	 * @param images
-	 *            The images
-	 */
-	public void setImages(Map<Integer, Image> images) {
-		this.images = images;
-	}
-	
 	@JsonProperty("inCart")
 	public Boolean isInCart() {
 		return inCart;
@@ -260,5 +229,34 @@ public class Gem extends Model {
 		gem.setImage(GemData.getImage());
 		gem.setPrice((double) (new Random().nextInt(30000) + 2000));
 		return gem;
+	}
+	public Integer getId() {
+		return id;
+	}
+	public void setId(Integer id) {
+		this.id = id;
+	}
+	
+	@Override
+	public String toString() {
+		return "Gem [name="
+				+ name
+				+ ", price="
+				+ price
+				+ ", description="
+				+ description
+				+ ", quantity="
+				+ quantity
+				+ ", canPurchase="
+				+ canPurchase
+				+ ", soldOut="
+				+ soldOut
+				+ ", specifications="
+				+ specifications
+				+ ", image="
+				+ image
+				+ ", gemReview="
+				+ gemReview
+				+ "]";
 	}
 }

@@ -1,13 +1,8 @@
 package models;
 
-public class Model {
-	private Integer id;
+public interface Model {
 
-	public Integer getId() {
-		return id;
-	}
+	public Integer getId();
 
-	public void setId(Integer id) {
-		this.id = id;
-	}
+	public void setId(Integer id);
 }
