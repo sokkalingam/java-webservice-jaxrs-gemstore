@@ -10,7 +10,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 
 import models.Model;
@@ -25,7 +24,7 @@ public class GemReview implements Model{
 	@Id @GeneratedValue
 	private Integer id;
 	
-	@JsonIgnore @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
 	private List<Review> reviews = new ArrayList<Review>();
 	
 	public AverageReview getAverageReview() {

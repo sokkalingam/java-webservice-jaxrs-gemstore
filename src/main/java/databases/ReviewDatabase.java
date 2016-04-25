@@ -37,14 +37,14 @@ public class ReviewDatabase extends Database {
 	public GemReview getGemReview(Integer gemId) {
 		Gem gem = gemDatabase.getGem(gemId);
 		if (gem != null)
-			return gemDatabase.getGem(gemId).getGemReview();
+			return gem.getGemReview();
 		return null;
 	}
 
 	public List<Review> getReviews(Integer gemId) {
 		Gem gem = gemDatabase.getGem(gemId);
 		if (gem != null)
-			return gemDatabase.getGem(gemId).getGemReview().getReviews();
+			return gem.getGemReview().getReviews();
 		return null;
 	}
 

@@ -105,7 +105,7 @@ public class GemService {
 	
 	public Gem addGemToCart(Integer id) {
 		Gem gem = getGem(id);
-		if (gem != null && gem.isInCart() != null && !gem.isInCart()) {
+		if (gem != null) {
 			gem.setInCart(true);
 			gemDatabase.updateGem(gem);
 			return gem;
@@ -115,7 +115,7 @@ public class GemService {
 	
 	public Gem removeGemFromCart(Integer id) {
 		Gem gem = getGem(id);
-		if (gem != null && gem.isInCart() != null && gem.isInCart()) {
+		if (gem != null) {
 			gem.setInCart(false);
 			gemDatabase.updateGem(gem);
 			return gem;
