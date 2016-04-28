@@ -30,7 +30,7 @@ public class Database {
 	
 	public void buildSessionFactory() {
 		if (sessionFactory == null)
-			sessionFactory = new Configuration().configure().buildSessionFactory();
+			sessionFactory = new Configuration().configure("/hibernate.cfg.xml").buildSessionFactory();
 	}
 	
 	public void openSession() {
