@@ -54,8 +54,8 @@ public class GemResource {
 	
 	@DELETE
 	@Path("/{id}")
-	public Response deleteGem(@PathParam("id") Integer id) {
-		return ResourceHelper.getResponse(gemService.deleteGem(id));
+	public void deleteGem(@PathParam("id") Integer id) {
+		gemService.deleteGem(id);
 	}
 	
 	@GET
