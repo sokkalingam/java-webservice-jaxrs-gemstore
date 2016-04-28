@@ -1,5 +1,6 @@
 package resources;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.ws.rs.Consumes;
@@ -16,6 +17,7 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
 
 import models.Gem;
+import models.review.GemReview;
 import models.review.Review;
 import services.GemService;
 
@@ -93,13 +95,24 @@ public class GemResource {
 	@GET
 	@Path("/populate/{gems}/{reviews}")
 	public Response populate(@PathParam("gems") Integer noOfGems, @PathParam("reviews") Integer noOfReviews) {
-		for (int i = 1; i <= noOfGems; i++)
-			gemService.addGem(Gem.generateModel());
+		List<Gem> gems = new ArrayList<Gem>(noOfGems);
 		
-		List<Gem> gems = gemService.getAllGems();
-		for (Gem gem : gems)
-			for (int i = 0; i < noOfReviews; i++)
-				new ReviewResource().addReview(gem.getId(), Review.generateRandomModel());
+		for (int i=0; i < noOfGems; i++) {
+			Gem gem = Gem.generateModel();
+			
+			List<Review> reviews = new ArrayList<Review>(noOfReviews);
+			for (int j = 0; j < noOfReviews; j++)
+				reviews.add(Review.generateRandomModel());
+			
+			GemReview gemReview = new GemReview();
+			gemReview.setReviews(reviews);
+			gem.setGemReview(gemReview);
+			gems.add(gem);
+		}
+		
+		gemService.addGems(gems);
+		gems = gemService.getAllGems();
+
 		return ResourceHelper.getResponse(gems);
 	}
 }

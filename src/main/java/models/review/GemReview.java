@@ -47,4 +47,8 @@ public class GemReview implements Model{
 	public String toString() {
 		return "GemReview [id=" + id + ", reviews=" + reviews + "]";
 	}
+
+	public void setReviews(List<Review> reviews) {
+		this.reviews = reviews;
+	}
 }

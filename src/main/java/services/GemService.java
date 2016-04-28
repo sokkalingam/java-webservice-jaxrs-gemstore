@@ -62,6 +62,12 @@ public class GemService {
 		return gem;
 	}
 	
+	public void addGems(List<Gem> gems) {
+		if (gems == null)
+			return;
+		gemDatabase.addGems(gems);
+	}
+	
 	/**Update Gem
 	 * Sets Id and preserves reviews
 	 * @param id

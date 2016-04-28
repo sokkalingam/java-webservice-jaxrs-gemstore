@@ -18,6 +18,15 @@ public class GemDatabase extends Database {
 		return id;
 	}
 	
+	public void addGems(List<Gem> gems) {
+		if (gems == null)
+			return;
+		sessionStart();
+		for (Gem gem : gems)
+			session.save(gem);
+		sessionEnd();
+	}
+	
 	public void deleteGem(Integer gemId) {
 		Gem gem = getGem(gemId);
 		sessionStart();
