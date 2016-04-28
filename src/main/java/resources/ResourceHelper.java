@@ -19,6 +19,10 @@ public class ResourceHelper {
 		return _build(Response.created(URI.create("")).entity(object));
 	}
 	
+	public static Response getResponse(Object object) {
+		return object != null ? ResourceHelper.responseOk(object) : ResourceHelper.responseNoContent();
+	}
+	
 	private static Response _build(ResponseBuilder responseBuilder) {
 		return responseBuilder.header("Access-Control-Allow-Origin", "*").build();
 	}
