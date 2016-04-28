@@ -9,7 +9,7 @@
 		<property name="hibernate.connection.username">wlinhsncokmtmd</property>
 		<property name="hibernate.connection.password">w5MWiU4--CI3H5xBlsFJWumEyd</property>
 		<property name="hibernate.connection.url">jdbc:postgresql://ec2-54-204-46-221.compute-1.amazonaws.com:5432/dd8ahja7p9j18r?sslmode=require</property>
-
+		<property name="hibernate.jdbc.batch_size">30</property>
 
 
 		<property name="connection_pool_size">1</property>

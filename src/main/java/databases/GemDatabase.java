@@ -22,8 +22,14 @@ public class GemDatabase extends Database {
 		if (gems == null)
 			return;
 		sessionStart();
-		for (Gem gem : gems)
-			session.save(gem);
+		for (int i = 0; i < gems.size(); i++) {
+			session.save(gems.get(i));
+			if (i % 30 == 0) {
+				session.flush();
+				session.clear();
+			}
+				
+		}
 		sessionEnd();
 	}
 	
