@@ -8,8 +8,8 @@ import org.hibernate.cfg.Configuration;
 public class Database {
 	
 	protected static SessionFactory sessionFactory;
-	protected static Session session;
-	protected static Transaction transaction;
+	protected Session session;
+	protected Transaction transaction;
 	
 	public Database() {
 		buildSessionFactory();
@@ -66,7 +66,7 @@ public class Database {
 	}
 
 	public void setSession(Session session) {
-		Database.session = session;
+		this.session = session;
 	}
 
 	public Transaction getTransaction() {
@@ -74,6 +74,6 @@ public class Database {
 	}
 
 	public void setTransaction(Transaction transaction) {
-		Database.transaction = transaction;
+		this.transaction = transaction;
 	}
 }
