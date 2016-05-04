@@ -25,72 +25,61 @@ import services.GemService;
 public class GemResource {
 	
 	private GemService gemService = new GemService();
-	private Gem gem;
-	private List<Gem> gems;
 	
 	@GET
 	public Response getAllGems(@Context UriInfo uriInfo) {
-		gems = gemService.searchGems(uriInfo);
-		return gems != null ? ResourceHelper.responseOk(gems) : ResourceHelper.responseNoContent();
+		return ResourceHelper.getResponse(gemService.searchGems(uriInfo));
 	}
 	
 	public Response getAllGems() {
-		gems = gemService.getAllGems();
-		return gems != null ? ResourceHelper.responseOk(gems) : ResourceHelper.responseNoContent();
+		return ResourceHelper.getResponse(gemService.getAllGems());
 	}
 	
 	@GET
 	@Path("/{id}")
 	public Response getGem(@PathParam("id") Integer id) {
-		this.gem = gemService.getGem(id);
-		return this.gem != null ? ResourceHelper.responseOk(gem) : ResourceHelper.responseNoContent();
+		return ResourceHelper.getResponse(gemService.getGem(id));
 	}
 	
 	@POST
 	public Response addGem(Gem gem) {
-		this.gem  = gemService.addGem(gem);
-		return this.gem != null ? ResourceHelper.responseCreated(gem) : ResourceHelper.responseNoContent();
+		return ResourceHelper.getResponse(gemService.addGem(gem));
 	}
 	
 	@PUT
 	@Path("/{id}")
 	public Response updateGem(@PathParam("id") Integer id, Gem gem) {
-		this.gem = gemService.updateGem(id, gem);
-		return this.gem != null ? ResourceHelper.responseOk(gem) : ResourceHelper.responseNoContent();
+		return ResourceHelper.getResponse(gemService.updateGem(id, gem));
 	}
 	
 	@DELETE
 	@Path("/{id}")
 	public Response deleteGem(@PathParam("id") Integer id) {
-		this.gem = gemService.deleteGem(id);
-		return this.gem != null ? ResourceHelper.responseOk(gem) : ResourceHelper.responseNoContent();
+		return ResourceHelper.getResponse(gemService.deleteGem(id));
 	}
 	
 	@GET
 	@Path("/cart")
 	public Response getGemsInCart() {
-		return ResourceHelper.responseOk(gemService.getGemsInCart());
+		return ResourceHelper.getResponse(gemService.getGemsInCart());
 	}
 	
 	@POST
 	@Path("/{id}/addToCart")
 	public Response addToCart(@PathParam("id") Integer id) {
-		this.gem = gemService.addGemToCart(id);
-		return this.gem != null ? ResourceHelper.responseOk(gem) : ResourceHelper.responseNoContent();
+		return ResourceHelper.getResponse(gemService.addGemToCart(id));
 	}
 	
 	@POST
 	@Path("/{id}/removeFromCart")
 	public Response removeFromCart(@PathParam("id") Integer id) {
-		this.gem = gemService.removeGemFromCart(id);
-		return this.gem != null ? ResourceHelper.responseOk(gem) : ResourceHelper.responseNoContent();
+		return ResourceHelper.getResponse(gemService.removeGemFromCart(id));
 	}
 	
 	@POST
 	@Path("/{id}/checkout")
 	public Response checkout(@PathParam("id") Integer id) {
-		this.gem = gemService.checkout(id);
-		return this.gem != null ? ResourceHelper.responseOk(gem) : ResourceHelper.responseNoContent();
+		return ResourceHelper.getResponse(gemService.checkout(id));
 	}
 	
 	@Path("/{gemId}/reviews")
@@ -101,18 +90,16 @@ public class GemResource {
 	/*
 	 * Test methods
 	 */
-	@SuppressWarnings("unchecked")
 	@GET
 	@Path("/populate/{gems}/{reviews}")
 	public Response populate(@PathParam("gems") Integer noOfGems, @PathParam("reviews") Integer noOfReviews) {
 		for (int i = 1; i <= noOfGems; i++)
 			gemService.addGem(Gem.generateModel());
 		
-		Response response = getAllGems();
-		List<Gem> gems = (List<Gem>) response.getEntity();
+		List<Gem> gems = gemService.getAllGems();
 		for (Gem gem : gems)
 			for (int i = 0; i < noOfReviews; i++)
 				new ReviewResource().addReview(gem.getId(), Review.generateRandomModel());
-		return response;
+		return ResourceHelper.getResponse(gems);
 	}
 }
