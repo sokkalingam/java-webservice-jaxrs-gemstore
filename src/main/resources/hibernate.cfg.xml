@@ -1,0 +1,26 @@
+<!DOCTYPE hibernate-configuration PUBLIC
+        "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+
+<hibernate-configuration>
+	<session-factory>
+		<property name="hibernate.dialect">org.hibernate.dialect.PostgreSQLDialect</property>
+		<property name="hibernate.connection.driver_class">org.postgresql.Driver</property>
+		<property name="hibernate.connection.username">wlinhsncokmtmd</property>
+		<property name="hibernate.connection.password">w5MWiU4--CI3H5xBlsFJWumEyd</property>
+		<property name="hibernate.connection.url">jdbc:postgresql://ec2-54-204-46-221.compute-1.amazonaws.com:5432/dd8ahja7p9j18r?sslmode=require</property>
+		<property name="hibernate.jdbc.batch_size">30</property>
+
+
+		<property name="connection_pool_size">1</property>
+
+		<property name="hbm2ddl.auto">update</property>
+
+		<property name="show_sql">true</property>
+
+		<mapping class="models.Gem" />
+		<mapping class="models.review.GemReview" />
+		<mapping class="models.review.Review" />
+
+	</session-factory>
+</hibernate-configuration>
