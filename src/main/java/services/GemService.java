@@ -100,6 +100,18 @@ public class GemService {
 		return null;
 	}
 	
+	public List<Gem> checkoutList(List<Integer> ids) {
+		if (ids == null)
+			return null;
+		List <Gem> gems = new ArrayList<Gem>();
+		for (Integer id:ids) {
+			Gem gem = checkout(id);
+			if (gem != null)
+				gems.add(gem);
+		}
+		return gems;
+	}
+	
 	public void deleteGem(Integer id) {
 		if (id != null)
 		gemDatabase.deleteGem(id);
