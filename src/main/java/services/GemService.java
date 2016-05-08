@@ -11,6 +11,7 @@ import org.apache.commons.lang3.StringUtils;
 import databases.GemDatabase;
 import models.Gem;
 import services.helpers.ParseHelper;
+import services.helpers.Sanitizer;
 
 public class GemService {
 	
@@ -36,10 +37,10 @@ public class GemService {
 		List<Gem> result = new ArrayList<Gem>();
 		
 		MultivaluedMap<String, String> queryParameters = uriInfo.getQueryParameters();
-		String searchName = queryParameters.getFirst("name");
-		String minPrice = queryParameters.getFirst("minPrice");
-		String maxPrice = queryParameters.getFirst("maxPrice");
-		String rating = queryParameters.getFirst("rating");
+		String searchName = Sanitizer.sanitize(queryParameters.getFirst("name"));
+		String minPrice = Sanitizer.sanitize(queryParameters.getFirst("minPrice"));
+		String maxPrice = Sanitizer.sanitize(queryParameters.getFirst("maxPrice"));
+		String rating = Sanitizer.sanitize(queryParameters.getFirst("rating"));
 		for (Gem gem : allGems)
 			if (_isNameContains(gem, searchName)
 					&& _isWithinPriceRange(gem, minPrice, maxPrice)
