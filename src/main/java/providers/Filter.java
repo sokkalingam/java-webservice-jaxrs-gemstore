@@ -19,6 +19,7 @@ public class Filter implements ContainerRequestFilter, ContainerResponseFilter{
 	@Override
 	public void filter(ContainerRequestContext requestContext, ContainerResponseContext responseContext)
 			throws IOException {
+		System.out.println("Request:: URL: " + requestContext.getUriInfo().getAbsolutePath() + ", MethodType: " + requestContext.getMethod());
 		_accessControlAllowAll(responseContext);
 		System.out.println("Response:: Status: " + responseContext.getStatus() + ", Response: " + responseContext.getEntity());
 	}
